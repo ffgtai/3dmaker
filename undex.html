@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D MiniMaker Studio - Colecionáveis Copa 2026 e Impressão 3D</title>
+    <style>
+        /* Cores e Configurações Gerais */
+        :root {
+            --cor-primaria: #009739; /* Verde Copa */
+            --cor-secundaria: #FFDF00; /* Amarelo Copa */
+            --cor-escura: #1A1A1A;
+            --cor-clara: #F4F4F9;
+            --cor-detalhe: #002776; /* Azul */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-clara);
+            color: var(--cor-escura);
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho / Navbar */
+        header {
+            background-color: var(--cor-escura);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--cor-secundaria);
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--cor-secundaria);
+        }
+
+        /* Banner Principal */
+        .hero {
+            background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-detalhe) 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            background-color: var(--cor-secundaria);
+            color: var(--cor-escura);
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.3s;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            background-color: #fff;
+        }
+
+        /* Seções de Produtos */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--cor-primaria);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .grid-produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card-produto {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-produto:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Placeholder de imagem (substitua pelas fotos reais) */
+        .foto-produto {
+            width: 100%;
+            height: 250px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: bold;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .info-produto {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .info-produto h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .info-produto p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .tag-copa {
+            background-color: var(--cor-detalhe);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.8rem;
+            border-radius: 5px;
+            align-self: flex-start;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .tag-infantil {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.8rem;
+            border-radius: 5px;
+            align-self: flex-start;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .btn-whats {
+            background-color: #25D366;
+            color: white;
+            text-align: center;
+            padding: 0.7rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-whats:hover {
+            background-color: #1ebd58;
+        }
+
+        /* Sobre Mim */
+        .sobre {
+            background-color: white;
+            padding: 4rem 2rem;
+        }
+
+        .sobre-conteudo {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .sobre-conteudo p {
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Aviso de Segurança / Rodapé */
+        footer {
+            background-color: var(--cor-escura);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .aviso-pais {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 1rem auto 0;
+            font-size: 0.85rem !important;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-container { flex-direction: column; gap: 1rem; }
+            nav a { margin: 0 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegação -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">3D MiniMaker <span>Studio</span></div>
+            <nav>
+                <a href="#copa">Copa 2026</a>
+                <a href="#kids">Linha Kids</a>
+                <a href="#sobre">Sobre Mim</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Seção Principal (Hero) -->
+    <section class="hero">
+        <h1>Ideias que viram realidade em 3D!</h1>
+        <p>Produtos colecionáveis da Copa do Mundo 2026 e brinquedos incríveis feitos por um pequeno grande maker de 8 anos.</p>
+        <a href="https://wa.me/55[DDD][SEU_TELEFONE]?text=Olá!%20Vi%20o%20site%20do%20MiniMaker%20e%20gostaria de%20conhecer%20os%20produtos." target="_blank" class="cta-btn">Falar com a gente no WhatsApp</a>
+    </section>
+
+    <!-- Vitrine Copa 2026 -->
+    <section id="copa" class="container">
+        <h2>Especial Copa do Mundo 2026</h2>
+        <div class="grid-produtos">
+            
+            <!-- Produto 1 -->
+            <div class="card-produto">
+                <!-- Para colocar imagem real, mude o estilo abaixo para: style="background-image: url('pasta/sua-foto.jpg');" -->
+                <div class="foto-produto">[ Foto do Organizador ]</div>
+                <div class="info-produto">
+                    <span class="tag-copa">Copa 2026</span>
+                    <h3>Porta-Figurinhas Oficial</h3>
+                    <p>Organize suas figurinhas repetidas da Copa de 2026 com estilo! Caixa personalizada com tampa deslizante.</p>
+                    <a href="https://wa.me/55[DDD][SEU_TELEFONE]?text=Olá!%20Tenho%20interesse%20no%20Porta-Figurinhas%20da%20Copa." target="_blank" class="btn-whats">Encomendar via WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Produto 2 -->
+            <div class="card-produto">
+                <div class="foto-produto">[ Foto da Mini Taça ]</div>
+                <div class="info-produto">
+                    <span class="tag-copa">Copa 2026</span>
+                    <h3>Mini Troféu do Mundo</h3>
+                    <p>Uma réplica incrível da taça da Copa do Mundo de 2026 em tamanho miniatura para decorar seu quarto ou mesa de estudos.</p>
+                    <a href="https://wa.me/55[DDD][SEU_TELEFONE]?text=Olá!%20Tenho%20interesse%20na%20Mini%20Taça%20da%20Copa." target="_blank" class="btn-whats">Encomendar via WhatsApp</a>
+                </div>
+            </div>
+
+            <!-- Produto 3 -->
+            <div class="card-produto">
+                <div class="foto-produto">[ Foto do Chaveiro ]</div>
+                <div class="info-produto">
+                    <span class="tag-copa">Copa 2026</span>
+                    <h3>Chaveiro Camiseta da Seleção</h3>
+                    <p>Chaveiros super resistentes com o escudo da seleção e o ano de 2026 para colocar na sua mochila da escola.</p>
+                    <a href="https://wa.me/55[DDD][SEU_TELEFONE]?text=Olá!%20Tenho%20interesse%20nos%20Chaveiros%20da%20Copa." target="_blank" class="btn-whats">Encomendar via WhatsApp</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Vitrine Linha Infantil -->
+    <section id="kids" class="container" style="background-color: #fff; max-width: 100%;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+            <h2>Brinquedos & Diversão Articulada</h2>
+            <div class="grid-produtos">
+                
+                <!-- Produto 4 -->
+                <div class="card-produto">
+                    <div class="foto-produto">[ Foto do Dragão ]</div>
+                    <div class="info-produto">
+                        <span class="tag-infantil">Sucesso</span>
+                        <h3>Dragão Cristal Articulado</h3>
+                        <p>O Fidget Toy que todo mundo ama! Um dragão inteiramente articulado impresso de uma vez só, perfeito para brincar.</p>
+                        <a href="https://wa.me/55[DDD][SEU_TELEFONE]?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20Dragão%20Articulado." target="_blank" class="btn-whats">Encomendar via WhatsApp</a>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="card-produto">
+                    <div class="foto-produto">[ Foto do Porta-Lápis ]</div>
+                    <div class="info-produto">
+                        <span class="tag-infantil">Quarto Geek</span>
+                        <h3>Organizador Dinossauro Rex</h3>
+                        <p>Deixe seus lápis e canetas organizados na boca de um dinossauro super irado feito em material biodegradável.</p>
+                        <a href="https://wa.me/55[DDD][SEU_TELEFONE]?text=Olá!%20Gostei%20do%20Organizador%20Dinossauro." target="_blank" class="btn-whats">Encomendar via WhatsApp</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre Mim -->
+    <section id="sobre" class="sobre">
+        <div class="sobre-conteudo">
+            <h2>Quem está por trás das impressoras?</h2>
+            <p>Olá! Eu tenho 8 anos e sou o criador do <strong>3D MiniMaker Studio</strong>. Com a ajuda dos meus pais, transformo rolos de filamento plástico em brinquedos e colecionáveis incríveis utilizando tecnologia de impressão 3D.</p>
+            <p>Cada peça que você vê aqui é acompanhada de perto por mim e leva um pedacinho da minha paixão por tecnologia, dinossauros e futebol!</p>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 3D MiniMaker Studio. Todos os direitos reservados.</p>
+        <p class="aviso-pais">🔒 <strong>Espaço Seguro:</strong> Este site é administrado de forma 100% segura e supervisionado pelos pais. Todos os pedidos e contatos são direcionados aos responsáveis legais.</p>
+    </footer>
+
+</body>
+</html>
